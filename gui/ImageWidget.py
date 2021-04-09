@@ -22,7 +22,7 @@ class ImageWidget(QWidget):
         h = pixmap.height()
         print(w, h)
         print(self.main.width(), self.main.height())
-        if w > self.main.width() and h > self.main.height():
+        if w > self.main.width() or h > self.main.height():
             percent = 1.0
             while w > self.main.width() or h > self.main.height():
                 w = percent * w
