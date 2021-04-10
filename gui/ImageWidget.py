@@ -22,9 +22,9 @@ class ImageWidget(QWidget):
         h = pixmap.height()
         print(w, h)
         print(self.main.width(), self.main.height())
-        if w > self.main.width() or h > self.main.height():
-            percent = 1.0
-            while w > self.main.width() or h > self.main.height():
+        if w > self.main.width() - 50 or h > self.main.height() -50:
+            percent = 0.99
+            while w > self.main.width() - 50 or h > self.main.height() - 50:
                 w = percent * w
                 h = percent * h
                 percent = percent - 0.01
@@ -36,4 +36,9 @@ class ImageWidget(QWidget):
         self.resize(self.image.width() + 50, self.image.height() + 50)
         m1 = (self.main.width() - self.image.width() - 50)/2
         m2 = (self.main.height() - self.image.height() - 50)/2
+        self.move(m1, m2)
+
+    def updateMargin(self):
+        m1 = (self.main.width() - self.image.width() - 50) / 2
+        m2 = (self.main.height() - self.image.height() - 50) / 2
         self.move(m1, m2)
