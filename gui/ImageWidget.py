@@ -51,9 +51,11 @@ class ImageWidget(QWidget):
         self.layout.setSpacing(0)
         self.setMouseTracking(True)
 
-    def set_image(self, image):
-        img = ImageQt(image)
-        pixmap = QPixmap.fromImage(img)
+    def set_image(self, pixmap):
+        #img = ImageQt(image)
+        #pixmap = QPixmap.fromImage(img)
+        #pixmap = QPixmap(address)
+        #pixmap = image.get_pixmap()
         self.original_pixmap = pixmap
         w = pixmap.width()
         h = pixmap.height()

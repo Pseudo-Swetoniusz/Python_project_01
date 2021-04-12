@@ -1,9 +1,11 @@
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QStyleFactory
 
 from gui.LayersFrame import LayersFrame
 from gui.MainFrame import MainFrame
 from gui.ToolsFrame import ToolsFrame
 from image.BitImage import BitImage
+from PIL import Image
 
 
 class MainWindow(QMainWindow):
@@ -32,9 +34,10 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Python_project_01')
         self.setStyleSheet("background:#4f4f4f;")
 
+
     def choose_image(self, scr):
         self.image.set_image(scr)
-        self.center.set_image(self.image.get_image())
+        self.center.set_image(self.image.get_pixmap())
 
     def save_image(self):
         self.image.array_to_image()

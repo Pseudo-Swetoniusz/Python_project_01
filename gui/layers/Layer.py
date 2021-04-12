@@ -10,7 +10,7 @@ class Layer:
 
 
 class Layers:
-    def __init__(self,layers = []):
+    def __init__(self, layers = []):
         self.layer = layers
 
     def add(self,newLayer):
