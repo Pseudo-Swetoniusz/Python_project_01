@@ -15,7 +15,6 @@ class BitImage:
         image_sequence = self.original_image.getdata()
         array = list(image_sequence)
         self.image_array = np.array(array)
-        print(self.image_array)
 
     def array_to_image(self, image_path="tempImage.png"):
         img = Image.fromarray(self.image_array)  # rgb?

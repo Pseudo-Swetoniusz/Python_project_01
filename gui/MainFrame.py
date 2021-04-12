@@ -12,8 +12,6 @@ class MainFrame(QFrame):
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.window = parent
         self.image = ImageWidget(self)
-        print(self.width())
-        print(self.height())
 
     def set_image(self, image):
         self.image.set_image(image)
