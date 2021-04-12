@@ -1,6 +1,5 @@
 from PIL.ImageQt import ImageQt
-from PyQt5.QtWidgets import QLabel, QWidget, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, \
-    QFileDialog, QLineEdit, QSlider, QGridLayout, QGraphicsScene, QGraphicsView
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGraphicsScene, QGraphicsView
 from PyQt5.QtGui import QIcon, QPixmap, QPainter
 from PyQt5.QtCore import Qt
 

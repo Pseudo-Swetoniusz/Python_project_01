@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-import sys
 
 
 class BitImage:
@@ -11,7 +10,7 @@ class BitImage:
 
     def set_image(self, image_path):
         self.original_image = Image.open(image_path)
-        self.original_image.show()
+        #self.original_image.show()
         self.image = self.original_image
         image_sequence = self.original_image.getdata()
         array = list(image_sequence)
@@ -19,10 +18,10 @@ class BitImage:
         print(self.image_array)
 
     def array_to_image(self, image_path="tempImage.png"):
-        img = Image.fromarray(self.image_array, 'RGB')  # rgb?
+        img = Image.fromarray(self.image_array)  # rgb?
         # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
         img.save(image_path)
-        # img.show()
+        img.show()
 
     def get_image(self):
         return self.image

@@ -1,7 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QWidget, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, \
-    QFileDialog, QLineEdit, QSlider, QGridLayout, QFrame, QSizePolicy
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtWidgets import QFrame, QSizePolicy
 
 from gui import MainWindow
 from gui.ImageWidget import ImageWidget

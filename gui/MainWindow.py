@@ -1,7 +1,4 @@
-from PyQt5.QtCore import Qt, QEvent
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QGridLayout, QWidget, QHBoxLayout, QVBoxLayout, QSplitter, QApplication, \
-    QStyleFactory, QFrame
+from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QStyleFactory
 
 from gui.LayersFrame import LayersFrame
 from gui.MainFrame import MainFrame
