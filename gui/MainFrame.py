@@ -18,8 +18,14 @@ class MainFrame(QFrame):
         print(self.width())
         print(self.height())
 
-    def set_image(self, scr):
-        self.image.set_image(scr)
+    def set_image(self, image):
+        self.image.set_image(image)
 
     def resizeEvent(self, e):
-        self.image.updateMargin()
+        self.image.update_margin()
+
+    def enable_brush(self):
+        self.image.enable_brush()
+
+    def enable_rubber(self):
+        self.image.enable_rubber()

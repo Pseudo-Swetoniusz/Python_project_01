@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QGridLayout, QWidget, QHBoxLayout, QVBo
 from gui.LayersFrame import LayersFrame
 from gui.MainFrame import MainFrame
 from gui.ToolsFrame import ToolsFrame
+from image.BitImage import BitImage
 
 
 class MainWindow(QMainWindow):
@@ -14,6 +15,7 @@ class MainWindow(QMainWindow):
         self.left = ToolsFrame(self)
         self.center = MainFrame(self)
         self.right = LayersFrame(self)
+        self.image = BitImage()
         self.initUI()
         self.showMaximized()
         self.show()
@@ -34,5 +36,14 @@ class MainWindow(QMainWindow):
         self.setStyleSheet("background:#4f4f4f;")
 
     def choose_image(self, scr):
-        print("Main Window")
-        self.center.set_image(scr)
+        self.image.set_image(scr)
+        self.center.set_image(self.image.get_image())
+
+    def save_image(self):
+        self.image.array_to_image()
+
+    def enable_brush(self):
+        self.center.enable_brush()
+
+    def enable_rubber(self):
+        self.center.enable_rubber()
