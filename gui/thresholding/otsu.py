@@ -1,28 +1,31 @@
+
 import numpy as np
 
 MAX_PIX=256
 
 
-def generateHist(image):
+def generateHist(layer):
     x=np.arange(0,MAX_PIX)
     histogram=np.zeros(MAX_PIX)
-    width,height=image.shape
+    width,height=layer.dimensions()
     for i in range(width):
         for j in range(height):
-            histogram[image[i][j]]+=1
+            if(layer.pixelInMask(i,j)):
+                histogram[layer.pixels[i][j]]+=1
     plt.bar(x, histogram, color='b', width=5, align='center', alpha=0.25)
     plt.show()
     return histogram
 
-def thresholdImage(image,threshold):
-    width, height = image.shape
+def thresholdImage(layer,threshold):
+    width, height = layer.dimensions()
     result=np.zeros((width,height))
     for i in range(0,width):
         for j in range(0,height):
-            if (image[i][j]<threshold)
-                result[i][j]=0
-            else
-                result[i][j]=MAX_PIX-1
+            if (layer.pixelInMask(i, j)):
+                if (layer.pixels[i][j]<threshold)
+                    result[i][j]=0
+                else
+                    result[i][j]=MAX_PIX-1
 
     return result
 
@@ -71,13 +74,13 @@ def calculateThreshold(histogram,num):
     return threshold
 
 
-def automaticThreshold(image):
-    histogram=generateHist(image)
-    width, height = image.shape
+def automaticThreshold(layer):
+    histogram=generateHist(layer)
+    width, height = layer.dimensions()
     threshold=calculateThreshold(histogram,width*height)
 
-def otsu(image,threshold=None):
+def otsu(layer,threshold=None):
     if(threshold==None):
-        threshold=automaticThreshold(image)
-    resultImage=thresholdImage(image,threshold)
+        threshold=automaticThreshold(layer)
+    resultImage=thresholdImage(layer,threshold)
     return resultImage
