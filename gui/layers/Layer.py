@@ -1,17 +1,33 @@
 import numpy as np
+from otsu import otsu
 
 class Layer:
-    def __init__(self, imageArray, activeArray):
-        self.imageArray = imageArray
-        self.activeArray = activeArray
+    def __init__(self, brightness, number, layerAssigned, width, height):
+        self.number = number
+        self.pixels = layerAssigned
+        self.brightness = brightness
+        self.width = width
+        self.height = height
+        self.result = np.zeros((width,height))
 
     def pixelInMask(self,i,j):
-        return self.activeArray[i][j]
+        return (self.pixels[i][j]==self.number)
+
+    def dimensions(self):
+        return width,height
+
+    def otsu(self,threshold=None):
+        self.result=otsu(self,threshold)
 
 
 class Layers:
-    def __init__(self, layers = []):
+    def __init__(self, image, layers = []):
         self.layer = layers
+        if(self.layer==[]):
+            self.layer.append(0)
+        self.image = image
+        self.width, self.height = image.shape
+        self.layerAssigned = zeros((width,height))
 
     def add(self,newLayer):
         self.layer.append(newLayer)
@@ -22,13 +38,3 @@ class Layers:
     def size(self):
         return len(self.layer)
 
-
-
-w, h = 512, 512
-data = np.zeros((h, w, 3), dtype=np.uint8)
-data[0:256, 0:256] = [255, 0, 0]
-active = [[False for i in range(w)] for i in range(h)]
-for i in range(w):
-    for j in range(h):
-        if(j<400 and j>100 and i>50 and i<450):
-            active[i][j]=True
