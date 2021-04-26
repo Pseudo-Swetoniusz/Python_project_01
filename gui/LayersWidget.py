@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QSt
 from gui.LayersFrame import LayersFrame
 from gui.MainFrame import MainFrame
 from gui.ToolsFrame import ToolsFrame
-from image.BitImage import BitImage
+from image.BinaryImage import BinaryImage
 from PIL import Image
 
 

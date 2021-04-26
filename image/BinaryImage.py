@@ -6,7 +6,7 @@ from PyQt5.QtGui import QPixmap, QImage
 from image.Layer import Layers
 
 
-class BitImage:
+class BinaryImage:
     def __init__(self):
         self.original_image = Image
         self.image = self.original_image
