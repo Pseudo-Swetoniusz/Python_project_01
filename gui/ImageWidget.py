@@ -1,5 +1,5 @@
 from PIL.ImageQt import ImageQt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QLabel
 from PyQt5.QtGui import QIcon, QPixmap, QPainter
 from PyQt5.QtCore import Qt
 
@@ -10,6 +10,7 @@ class View(QGraphicsView):
         self.brush = False
         self.rubber = False
         self.parent = parent
+        self.canvas1 = QPixmap(self.parent.image_width, self.parent.image_height)
 
     def enable_brush(self):
         if not self.brush:
@@ -29,6 +30,12 @@ class View(QGraphicsView):
         if self.brush:
             print("move brush")
             print(e.x(), e.y())
+            painter = QPainter()
+            painter.begin(self)
+            painter.setPen(Qt.black)
+            painter.drawPoint(e.x(), e.y())
+            painter.end()
+            self.update()
             el = [e.x(), e.y()]
             self.parent.append_to_layer(el)
         elif self.rubber:
@@ -50,6 +57,9 @@ class ImageWidget(QWidget):
         self.original_pixmap = QPixmap()
         self.current_pixmap = QPixmap()
         self.pixmap = QGraphicsPixmapItem()
+        self.canvas = QPixmap()
+        # self.label = QLabel()
+        # self.label.setPixmap(self.canvas)
         self.main = parent
         self.layout = QHBoxLayout()
         self.setLayout(self.layout)
@@ -79,6 +89,8 @@ class ImageWidget(QWidget):
         self.image_height = h
         self.current_pixmap = pixmap_new
         self.pixmap.setPixmap(self.current_pixmap)
+        self.canvas = QPixmap(w, h)
+        self.view.update()
         # self.image.update()
         self.resize(self.image.width() + 50, self.image.height() + 50)
         m1 = (self.main.width() - self.image.width() - 50) / 2

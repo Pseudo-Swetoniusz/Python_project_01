@@ -14,7 +14,8 @@ class BitImage:
         self.array = []
         self.width = 0
         self.height = 0
-        self.layers = Layers()
+        self.layers_array = []
+        self.layers = None
 
     def set_image(self, image_path):
         self.original_image = Image.open(image_path).convert('LA')
@@ -23,10 +24,11 @@ class BitImage:
         self.image = self.original_image
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
+        self.layers = Layers(self)
 
     def array_to_image(self, image_path="tempImage.png"):
-        self.original_image.show()
-        img = Image.fromarray(self.image_array, 'RGBA')  # rgb?
+        self.image.show()
+        img = Image.fromarray(self.image_array, 'LA')  # rgb?
         img.show()
         # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
         img.save(image_path)
@@ -55,6 +57,8 @@ class BitImage:
 
     def blur(self):
         self.image = self.image.filter(ImageFilter.GaussianBlur)
+        self.image_array = np.asarray(self.image)
+        self.array = np.array(self.image)
 
     def show_image(self):
         self.image.show()
@@ -66,19 +70,26 @@ class BitImage:
     def get_image_height(self):
         return self.height
 
+    def count_brightness(self, x, y, brightness):
+        max_value = brightness[1]
+        min_value = brightness[0]
+        if(self.array[y, x, 0] >= min_value and self.array[y, x, 0] <= max_value):
+            return True
+        else:
+            return False
+
     def add_layer(self, layer_array):
-        print(layer_array)
         max_value = 0
         min_value = 255
         for i in range(len(layer_array)):
             x = layer_array[i][0]
             y = layer_array[i][1]
-            print(x, y)
-            print(self.array[y, x, 0])
             if(self.array[y, x, 0] >= max_value):
                 max_value = self.array[y, x, 0]
             if(self.array[y, x, 0] <= min_value):
                 min_value = self.array[y, x, 0]
         print(min_value)
         print(max_value)
+        brightness = [min_value, max_value]
+        self.layers.add(brightness)
 

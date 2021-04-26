@@ -1,33 +1,60 @@
 import numpy as np
-
+from PIL import Image, ImageFilter
+from thresholding import otsu
 
 class Layer:
-    def __init__(self, index):
-        self.index = index
+    def __init__(self, brightness, number=-1, layerAssigned=[], width=0, height=0, removed=False):
+        self.number = number
+        self.pixels = layerAssigned
+        self.brightness = brightness
+        self.width = width
+        self.height = height
+        self.result = np.zeros((self.width, self.height))
+        self.removed = removed
+        print("created layer")
+
+    def pixelInMask(self,i,j):
+        return (self.pixels[i][j]==self.number)
+
+    def dimensions(self):
+        return self.width, self.height
+
+    def otsu(self,threshold=None):
+        self.result=otsu(self,threshold)
 
 
 class Layers:
-    def __init__(self, layers=[]):
-        self.layer = layers
-        self.layer_index_array = []
-        first_layer = Layer(0)
-        self.add(first_layer)
+    def __init__(self, image, layers = []):
+        self.layers = layers
+        if(self.layers==[]):
+            self.layers.append(0)
+        self.image = image
+        self.width = self.image.get_image_width()
+        self.height = self.image.get_image_height()
+        self.layerAssigned = np.zeros((self.width, self.height))
 
-    def add(self, newLayer):
-        self.layer.append(newLayer)
+    def add(self, brightness):
+        print("adding layer")
+        newNumber = len(self.layers)
+        print(newNumber)
+        newLayer = Layer(brightness, newNumber, self.layerAssigned, self.width, self.height)
+        self.layers.append(newLayer)
+        print("appended layer")
+        for i in range(self.width):
+            for j in range(self.height):
+                # pixel=self.image[i][j]
+                pixLayer=self.layerAssigned[i][j]
+                if(self.image.count_brightness(i, j, brightness) and (pixLayer==0 or pixLayer.removed==True)):
+                    self.layerAssigned[i][j]=newNumber
 
-    def remove(self, layer):
-        self.layer.remove(layer)
+
+
+    def remove(self,layer):
+        for i in range(self.width):
+            for j in range(self.height):
+                if (self.layerAssigned[i][j] == layer.number):
+                    self.layerAssigned[i][j] = 0
+        layer.removed=True
 
     def size(self):
         return len(self.layer)
-
-
-w, h = 512, 512
-data = np.zeros((h, w, 3), dtype=np.uint8)
-data[0:256, 0:256] = [255, 0, 0]
-active = [[False for i in range(w)] for i in range(h)]
-for i in range(w):
-    for j in range(h):
-        if (j < 400 and j > 100 and i > 50 and i < 450):
-            active[i][j] = True

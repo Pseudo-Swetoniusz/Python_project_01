@@ -15,7 +15,7 @@ class Layer:
         return (self.pixels[i][j]==self.number)
 
     def dimensions(self):
-        return width,height
+        return self.width, self.height
 
     def otsu(self,threshold=None):
         self.result=otsu(self,threshold)
@@ -28,17 +28,17 @@ class Layers:
             self.layer.append(0)
         self.image = image
         self.width, self.height = image.shape
-        self.layerAssigned = zeros((width,height))
+        self.layerAssigned = np.zeros((self.width, self.height))
 
-    def add(self,brightness):
+    def add(self, brightness):
         newNumber=len(self.layers)
-        newLayer=Layer(brightness,newNumber,self.layerAssigned,self.width,self.height)
+        newLayer=Layer(brightness, newNumber, self.layerAssigned, self.width, self.height)
         self.layers.append(newLayer)
         for i in range(self.width):
             for j in range(self.height):
                 pixel=self.image[i][j]
                 pixLayer=self.layerAssigned[i][j]
-                if(pixel>=brightness[0] and pixel<=brightness[1] and (pixLayer==0 or pixlayer.removed==True)):
+                if(pixel>=brightness[0] and pixel<=brightness[1] and (pixLayer==0 or pixLayer.removed==True)):
                     self.layerAssigned[i][j]=newNumber
 
 
