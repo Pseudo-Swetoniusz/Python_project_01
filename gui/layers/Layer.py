@@ -2,13 +2,14 @@ import numpy as np
 from otsu import otsu
 
 class Layer:
-    def __init__(self, brightness, number, layerAssigned, width, height):
+    def __init__(self, brightness, number=-1, layerAssigned=[], width=0, height=0, removed=False):
         self.number = number
         self.pixels = layerAssigned
         self.brightness = brightness
         self.width = width
         self.height = height
         self.result = np.zeros((width,height))
+        self.removed=removed
 
     def pixelInMask(self,i,j):
         return (self.pixels[i][j]==self.number)
@@ -29,11 +30,25 @@ class Layers:
         self.width, self.height = image.shape
         self.layerAssigned = zeros((width,height))
 
-    def add(self,newLayer):
-        self.layer.append(newLayer)
+    def add(self,brightness):
+        newNumber=len(self.layers)
+        newLayer=Layer(brightness,newNumber,self.layerAssigned,self.width,self.height)
+        self.layers.append(newLayer)
+        for i in range(self.width):
+            for j in range(self.height):
+                pixel=self.image[i][j]
+                pixLayer=self.layerAssigned[i][j]
+                if(pixel>=brightness[0] and pixel<=brightness[1] and (pixLayer==0 or pixlayer.removed==True)):
+                    self.layerAssigned[i][j]=newNumber
+
+
 
     def remove(self,layer):
-        self.layer.remove(layer)
+        for i in range(self.width):
+            for j in range(self.height):
+                if (self.layerAssigned[i][j] == layer.number):
+                    self.layerAssigned[i][j] = 0
+        layer.removed=True
 
     def size(self):
         return len(self.layer)
