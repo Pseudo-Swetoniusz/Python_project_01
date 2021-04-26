@@ -1,7 +1,9 @@
-from PIL import Image
+from PIL import Image, ImageFilter
 import numpy as np
 from PIL.ImageQt import ImageQt
 from PyQt5.QtGui import QPixmap, QImage
+
+from image.Layer import Layers
 
 
 class BitImage:
@@ -9,25 +11,31 @@ class BitImage:
         self.original_image = Image
         self.image = self.original_image
         self.image_array = []
+        self.array = []
+        self.width = 0
+        self.height = 0
+        self.layers = Layers()
 
     def set_image(self, image_path):
-        self.original_image = Image.open(image_path)
+        self.original_image = Image.open(image_path).convert('LA')
+        self.width, self.height = self.original_image.size
         self.original_image.show()
         self.image = self.original_image
-        image_sequence = self.original_image.getdata()
-        array = list(image_sequence)
-        self.image_array = np.array(array)
+        self.image_array = np.asarray(self.image)
+        self.array = np.array(self.image)
 
     def array_to_image(self, image_path="tempImage.png"):
-        img = Image.fromarray(self.image_array)  # rgb?
+        self.original_image.show()
+        img = Image.fromarray(self.image_array, 'RGBA')  # rgb?
+        img.show()
         # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
         img.save(image_path)
-        img.show()
 
     def get_image(self):
         return self.image
 
-    def pil2pixmap(self, im):
+    def pil2pixmap(self, img):
+        im = img
         if im.mode == "RGB":
             r, g, b = im.split()
             im = Image.merge("RGB", (b, g, r))
@@ -35,8 +43,7 @@ class BitImage:
             r, g, b, a = im.split()
             im = Image.merge("RGBA", (b, g, r, a))
         elif im.mode == "L":
-            im = im.convert("RGBA")
-        # Bild in RGBA konvertieren, falls nicht bereits passiert
+            im = img.convert("RGBA")
         im2 = im.convert("RGBA")
         data = im2.tobytes("raw", "RGBA")
         qim = QImage(data, im.size[0], im.size[1], QImage.Format_ARGB32)
@@ -45,3 +52,33 @@ class BitImage:
 
     def get_pixmap(self):
         return self.pil2pixmap(self.image)
+
+    def blur(self):
+        self.image = self.image.filter(ImageFilter.GaussianBlur)
+
+    def show_image(self):
+        self.image.show()
+
+    def get_image_width(self):
+        print("get")
+        return self.width
+
+    def get_image_height(self):
+        return self.height
+
+    def add_layer(self, layer_array):
+        print(layer_array)
+        max_value = 0
+        min_value = 255
+        for i in range(len(layer_array)):
+            x = layer_array[i][0]
+            y = layer_array[i][1]
+            print(x, y)
+            print(self.array[y, x, 0])
+            if(self.array[y, x, 0] >= max_value):
+                max_value = self.array[y, x, 0]
+            if(self.array[y, x, 0] <= min_value):
+                min_value = self.array[y, x, 0]
+        print(min_value)
+        print(max_value)
+

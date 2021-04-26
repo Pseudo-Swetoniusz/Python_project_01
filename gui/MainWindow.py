@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
 
     def choose_image(self, scr):
         self.image.set_image(scr)
-        self.center.set_image(self.image.get_pixmap())
+        self.center.set_image(self.image)
 
     def save_image(self):
         self.image.array_to_image()
@@ -47,3 +47,11 @@ class MainWindow(QMainWindow):
 
     def enable_rubber(self):
         self.center.enable_rubber()
+
+    def apply_blur(self):
+        self.image.blur()
+        self.image.show_image()
+        self.center.update_image()
+
+    def add_layer(self):
+        self.center.add_layer()

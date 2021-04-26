@@ -1,4 +1,4 @@
-
+import matplotlib as plt
 import numpy as np
 
 MAX_PIX=256
@@ -22,9 +22,9 @@ def thresholdImage(layer,threshold):
     for i in range(0,width):
         for j in range(0,height):
             if (layer.pixelInMask(i, j)):
-                if (layer.pixels[i][j]<threshold)
+                if (layer.pixels[i][j]<threshold):
                     result[i][j]=0
-                else
+                else:
                     result[i][j]=MAX_PIX-1
 
     return result
@@ -44,7 +44,7 @@ def mean(x,y,histogram):
         denominator+=histogram[i]
     if(denominator==0):
         return 0            #0 case!!!
-    return numerator/denomiator
+    return numerator/denominator
 
 def variance(x,y,histogram,mean):
     numerator = 0

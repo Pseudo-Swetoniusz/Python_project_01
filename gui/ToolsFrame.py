@@ -23,6 +23,13 @@ class ToolsFrame(QFrame):
                                      "background-size: cover; background-repeat: no-repeat; background-position: "
                                      "center;")
         layout.addWidget(self.open_file)
+        self.blur = QPushButton("G")
+        self.blur.clicked.connect(self.apply_blur)
+        self.blur.setGeometry(10, 0, 50, 50)
+        self.blur.setStyleSheet("background-color:#2c2c2c; "
+                                "background-size: cover; background-repeat: no-repeat; background-position: "
+                                "center; color:#e4e4e4;")
+        layout.addWidget(self.blur)
         self.brush = QPushButton("P")
         self.brush.clicked.connect(self.enable_brush)
         self.brush.setGeometry(10, 0, 50, 50)
@@ -57,8 +64,13 @@ class ToolsFrame(QFrame):
         options |= QFileDialog.DontUseNativeDialog
         file_name = QFileDialog.getOpenFileName(self, 'Open File', '/', "image Files (*.png *.jpg *.jpeg *.bmp * "
                                                                         ".tif)")
-        if file_name:
+        if file_name[0] == '':
+            print("No image")
+        elif file_name:
+            print("image")
             self.window.choose_image(file_name[0])
+        else:
+            print("No image")
 
     def enable_brush(self):
         print("brush")
@@ -69,8 +81,12 @@ class ToolsFrame(QFrame):
         self.window.enable_rubber()
 
     def add_layer(self):
-        print("add")
+        self.window.add_layer()
 
     def save_file(self):
         print("save")
         self.window.save_image()
+
+    def apply_blur(self):
+        print("blur")
+        self.window.apply_blur()

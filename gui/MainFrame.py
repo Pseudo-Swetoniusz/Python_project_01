@@ -24,3 +24,10 @@ class MainFrame(QFrame):
 
     def enable_rubber(self):
         self.image.enable_rubber()
+
+    def update_image(self):
+        self.image.update_image()
+
+    def add_layer(self):
+        print("add")
+        self.image.add_layer()
