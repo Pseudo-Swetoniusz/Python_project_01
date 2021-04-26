@@ -1,6 +1,6 @@
 from PIL.ImageQt import ImageQt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QLabel
-from PyQt5.QtGui import QIcon, QPixmap, QPainter
+from PyQt5.QtGui import QIcon, QPixmap, QPainter, QColor
 from PyQt5.QtCore import Qt
 
 
@@ -28,22 +28,16 @@ class View(QGraphicsView):
 
     def mouseMoveEvent(self, e):
         if self.brush:
-            print("move brush")
-            print(e.x(), e.y())
-            painter = QPainter()
-            painter.begin(self)
-            painter.setPen(Qt.black)
+            # print("move brush")
+            # print(e.x(), e.y())
+            pixmap = self.parent.canvas.pixmap()
+            painter = QPainter(pixmap)
             painter.drawPoint(e.x(), e.y())
             painter.end()
-            self.update()
+            self.parent.canvas.setPixmap(pixmap)
+            # self.parent.image.addPixmap(self.parent.canvas)
             el = [e.x(), e.y()]
             self.parent.append_to_layer(el)
-        elif self.rubber:
-            print("move rubber")
-            print(e.x(), e.y())
-        else:
-            print("move")
-            print(e.x(), e.y())
 
 
 class ImageWidget(QWidget):
@@ -57,7 +51,7 @@ class ImageWidget(QWidget):
         self.original_pixmap = QPixmap()
         self.current_pixmap = QPixmap()
         self.pixmap = QGraphicsPixmapItem()
-        self.canvas = QPixmap()
+        self.canvas = QGraphicsPixmapItem()
         # self.label = QLabel()
         # self.label.setPixmap(self.canvas)
         self.main = parent
@@ -65,6 +59,7 @@ class ImageWidget(QWidget):
         self.setLayout(self.layout)
         self.image = QGraphicsScene()
         self.image.addItem(self.pixmap)
+        self.image.addItem(self.canvas)
         self.view = View(self, self.image)
         self.view.setScene(self.image)
         self.layout.addWidget(self.view)
@@ -89,7 +84,10 @@ class ImageWidget(QWidget):
         self.image_height = h
         self.current_pixmap = pixmap_new
         self.pixmap.setPixmap(self.current_pixmap)
-        self.canvas = QPixmap(w, h)
+        canvas_map = QPixmap(w, h)
+        canvas_map.fill(QColor(0, 0, 0, 0))
+        self.canvas.setPixmap(canvas_map)
+        self.image.update()
         self.view.update()
         # self.image.update()
         self.resize(self.image.width() + 50, self.image.height() + 50)
@@ -138,3 +136,6 @@ class ImageWidget(QWidget):
             layer_array_new.append(el)
         self.img.add_layer(layer_array_new)
         self.layer_array = []
+        canvas_map = QPixmap(self.image_width, self.image_height)
+        canvas_map.fill(QColor(0, 0, 0, 0))
+        self.canvas.setPixmap(canvas_map)

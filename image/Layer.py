@@ -44,8 +44,10 @@ class Layers:
             for j in range(self.height):
                 # pixel=self.image[i][j]
                 pixLayer=self.layerAssigned[i][j]
-                if(self.image.count_brightness(i, j, brightness) and (pixLayer==0 or pixLayer.removed==True)):
-                    self.layerAssigned[i][j]=newNumber
+                # layer = self.layers.
+                if(self.image.count_brightness(i, j, brightness) and pixLayer==0):
+                    self.layerAssigned[i][j] = newNumber
+        print("layer added")
 
 
 

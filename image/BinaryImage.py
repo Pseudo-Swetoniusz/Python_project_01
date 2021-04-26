@@ -64,7 +64,6 @@ class BinaryImage:
         self.image.show()
 
     def get_image_width(self):
-        print("get")
         return self.width
 
     def get_image_height(self):
