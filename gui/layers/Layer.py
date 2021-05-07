@@ -41,8 +41,6 @@ class Layers:
                 if(pixel>=brightness[0] and pixel<=brightness[1] and (pixLayer==0 or pixLayer.removed==True)):
                     self.layerAssigned[i][j]=newNumber
 
-
-
     def remove(self,layer):
         for i in range(self.width):
             for j in range(self.height):
@@ -50,6 +48,15 @@ class Layers:
                     self.layerAssigned[i][j] = 0
         layer.removed=True
 
+    def toArray(self):
+        array=np.zeros((self.width,self.height))
+        for i in range(self.width):
+            for j in range(self.height):
+                layer=self.layerAssigned[i][j]
+                pixel=layer.result[i][j]
+                array[i][j]=pixel
+        return array
+        
     def size(self):
         return len(self.layer)
 
