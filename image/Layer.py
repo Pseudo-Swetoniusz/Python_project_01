@@ -48,9 +48,11 @@ class Layers:
                 if(self.image.count_brightness(i, j, brightness) and pixLayer==0):
                     self.layerAssigned[i][j] = newNumber
         print("layer added")
-        return newNumber
+        return newNumber, newLayer
 
-
+    def get_layer(self, index):
+        layer = self.layers[index]
+        return layer
 
     def remove(self,layer):
         for i in range(self.width):

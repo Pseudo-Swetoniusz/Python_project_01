@@ -77,6 +77,9 @@ class BinaryImage:
         else:
             return False
 
+    def get_layer(self, index):
+        return self.layers.get_layer(index)
+
     def add_layer(self, layer_array):
         max_value = 0
         min_value = 255
@@ -90,7 +93,7 @@ class BinaryImage:
         print(min_value)
         print(max_value)
         brightness = [min_value, max_value]
-        n = self.layers.add(brightness)
-        return n
+        n, layer = self.layers.add(brightness)
+        return n, layer
 
 

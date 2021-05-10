@@ -38,7 +38,8 @@ class MainWindow(QMainWindow):
     def choose_image(self, scr):
         self.image.set_image(scr)
         self.center.set_image(self.image)
-        self.right.add_layer_widget(0)
+        layer_0 = self.image.get_layer(0)
+        self.right.add_layer_widget(0, layer_0)
 
     def save_image(self):
         self.image.array_to_image()
@@ -55,5 +56,5 @@ class MainWindow(QMainWindow):
         self.center.update_image()
 
     def add_layer(self):
-        index = self.center.add_layer()
-        self.right.add_layer_widget(index)
+        index, layer = self.center.add_layer()
+        self.right.add_layer_widget(index, layer)

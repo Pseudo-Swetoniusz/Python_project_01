@@ -29,5 +29,5 @@ class MainFrame(QFrame):
         self.image.update_image()
 
     def add_layer(self):
-        index = self.image.add_layer()
-        return index
+        index, layer = self.image.add_layer()
+        return index, layer

@@ -2,12 +2,16 @@ from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QStyleFactory, QVBoxLayout, QLabel, \
     QPushButton
 
+from gui.OtsuWidget import OtsuWidget
+
 
 class LayerWidget(QWidget):
-    def __init__(self, parent, index, title):
+    def __init__(self, parent, index, title, layer):
         super(LayerWidget, self).__init__(parent)
+        self.thresh = None
         self.index = index
         self.parent = parent
+        self.layer = layer
         layout = QHBoxLayout(self)
         self.setGeometry(280, 30, 0, 0)
         self.setLayout(layout)
@@ -26,6 +30,8 @@ class LayerWidget(QWidget):
 
     def apply_tresholding(self):
         print("tresholding")
+        self.thresh = OtsuWidget(self.layer)
+        self.thresh.show()
 
 
 class LayersWidget(QWidget):
@@ -40,8 +46,8 @@ class LayersWidget(QWidget):
         self.layers = layers
         self.layout_widgets = []
 
-    def add_layer_widget(self, index):
+    def add_layer_widget(self, index, layer):
         title = "Layer " + str(index)
-        widget = LayerWidget(self, index, title)
+        widget = LayerWidget(self, index, title, layer)
         self.layout_widgets.append(widget)
         self.layout.addWidget(widget)

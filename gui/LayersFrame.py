@@ -23,6 +23,6 @@ class LayersFrame(QFrame):
         self.layers_widget = LayersWidget(self, None)
         layout.addWidget(self.layers_widget)
 
-    def add_layer_widget(self, index):
-        self.layers_widget.add_layer_widget(index)
+    def add_layer_widget(self, index, layer):
+        self.layers_widget.add_layer_widget(index, layer)
 

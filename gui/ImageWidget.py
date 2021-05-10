@@ -134,9 +134,9 @@ class ImageWidget(QWidget):
             y = self.layer_array[i][1] * scale
             el = [int(x), int(y)]
             layer_array_new.append(el)
-        index = self.img.add_layer(layer_array_new)
+        index, layer = self.img.add_layer(layer_array_new)
         self.layer_array = []
         canvas_map = QPixmap(self.image_width, self.image_height)
         canvas_map.fill(QColor(0, 0, 0, 0))
         self.canvas.setPixmap(canvas_map)
-        return index
+        return index, layer
