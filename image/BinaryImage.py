@@ -90,5 +90,7 @@ class BinaryImage:
         print(min_value)
         print(max_value)
         brightness = [min_value, max_value]
-        self.layers.add(brightness)
+        n = self.layers.add(brightness)
+        return n
+
 

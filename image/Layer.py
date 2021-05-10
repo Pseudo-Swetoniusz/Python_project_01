@@ -48,6 +48,7 @@ class Layers:
                 if(self.image.count_brightness(i, j, brightness) and pixLayer==0):
                     self.layerAssigned[i][j] = newNumber
         print("layer added")
+        return newNumber
 
 
 

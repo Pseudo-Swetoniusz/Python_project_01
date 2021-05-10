@@ -1,27 +1,47 @@
 from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QStyleFactory, QVBoxLayout
-
-from gui.LayersFrame import LayersFrame
-from gui.MainFrame import MainFrame
-from gui.ToolsFrame import ToolsFrame
-from image.BinaryImage import BinaryImage
-from PIL import Image
+from PyQt5.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QStyleFactory, QVBoxLayout, QLabel, \
+    QPushButton
 
 
 class LayerWidget(QWidget):
-    def __init__(self, parent, index):
+    def __init__(self, parent, index, title):
         super(LayerWidget, self).__init__(parent)
         self.index = index
         self.parent = parent
+        layout = QHBoxLayout(self)
+        self.setGeometry(280, 30, 0, 0)
+        self.setLayout(layout)
+        self.setStyleSheet("background:rgba(255,255,255,0.2)")
+        self.title = QLabel(title)
+        layout.addWidget(self.title)
+        self.title.setStyleSheet("color:#e4e4e4; font-size:15px; text-transform:uppercase;"
+                                 "letter-spacing:1px; width:290px; text-align:center;")
+        self.title.setGeometry(150, 30, 0, 0)
+        self.apply = QPushButton("T")
+        self.apply.clicked.connect(self.apply_tresholding)
+        self.apply.setGeometry(10, 0, 50, 50)
+        self.apply.setStyleSheet("background-color:#2c2c2c; "
+                                 "color:#e4e4e4;")
+        layout.addWidget(self.apply)
+
+    def apply_tresholding(self):
+        print("tresholding")
 
 
 class LayersWidget(QWidget):
     def __init__(self, parent, layers):
         super(LayersWidget, self).__init__(parent)
 
-        layout = QVBoxLayout(self)
-        self.setGeometry(290, 400, 0, 0)
-        self.setLayout(layout)
-        self.setStyleSheet("border: 1px solid white")
+        self.layout = QVBoxLayout(self)
+        self.setGeometry(300, 400, 0, 0)
+        self.setLayout(self.layout)
+        # self.setStyleSheet("border: 1px solid white")
         self.parent = parent
         self.layers = layers
+        self.layout_widgets = []
+
+    def add_layer_widget(self, index):
+        title = "Layer " + str(index)
+        widget = LayerWidget(self, index, title)
+        self.layout_widgets.append(widget)
+        self.layout.addWidget(widget)
