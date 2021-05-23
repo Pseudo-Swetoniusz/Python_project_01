@@ -5,13 +5,13 @@ from gui import MainWindow
 
 
 class ToolsFrame(QFrame):
-    def __init__(self, parent: MainWindow):
+        def __init__(self, parent: MainWindow):
         super(ToolsFrame, self).__init__(parent)
 
         # self.setFrameShape(QFrame.StyledPanel)
         self.window = parent
         self.setStyleSheet("background:#3a3a3a; border-right: 2px solid #323232;")
-        self.setFixedWidth(60)
+        self.setFixedWidth(160) #!!!
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -23,35 +23,29 @@ class ToolsFrame(QFrame):
                                      "background-size: cover; background-repeat: no-repeat; background-position: "
                                      "center;")
         layout.addWidget(self.open_file)
-        self.blur = QPushButton("G")
+        self.blur = QPushButton("Gaussian Blur")
         self.blur.clicked.connect(self.apply_blur)
         self.blur.setGeometry(10, 0, 50, 50)
         self.blur.setStyleSheet("background-color:#2c2c2c; "
                                 "background-size: cover; background-repeat: no-repeat; background-position: "
                                 "center; color:#e4e4e4;")
         layout.addWidget(self.blur)
-        self.brush = QPushButton("P")
+        self.brush = QPushButton("Brush")
         self.brush.clicked.connect(self.enable_brush)
         self.brush.setGeometry(10, 0, 50, 50)
         self.brush.setStyleSheet("background-color:#2c2c2c; "
                                  "background-size: cover; background-repeat: no-repeat; background-position: "
                                  "center; color:#e4e4e4;")
         layout.addWidget(self.brush)
-        self.rubber = QPushButton("R")
-        self.rubber.clicked.connect(self.enable_rubber)
-        self.rubber.setGeometry(10, 0, 50, 50)
-        self.rubber.setStyleSheet("background-color:#2c2c2c; "
-                                  "background-size: cover; background-repeat: no-repeat; background-position: "
-                                  "center; color:#e4e4e4;")
-        layout.addWidget(self.rubber)
-        self.add = QPushButton("A")
+        
+        self.add = QPushButton("Add Layer")
         self.add.clicked.connect(self.add_layer)
         self.add.setGeometry(10, 0, 50, 50)
         self.add.setStyleSheet("background-color:#2c2c2c; "
                                "background-size: cover; background-repeat: no-repeat; background-position: "
                                "center; color:#e4e4e4;")
         layout.addWidget(self.add)
-        self.save = QPushButton("S")
+        self.save = QPushButton("Save File")
         self.save.clicked.connect(self.save_file)
         self.save.setGeometry(10, 0, 50, 50)
         self.save.setStyleSheet("background-color:#2c2c2c; "
