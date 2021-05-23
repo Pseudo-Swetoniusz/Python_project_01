@@ -12,6 +12,8 @@ class Layer:
         self.height = height
         self.result = np.zeros((self.width, self.height))
         self.removed = removed
+        self.histogram=[]
+        self.threshold=None
         print("created layer")
 
     def pixelInMask(self, i, j):
