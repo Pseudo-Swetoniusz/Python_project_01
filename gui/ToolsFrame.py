@@ -5,13 +5,13 @@ from gui import MainWindow
 
 
 class ToolsFrame(QFrame):
-        def __init__(self, parent: MainWindow):
+    def __init__(self, parent: MainWindow):
         super(ToolsFrame, self).__init__(parent)
 
         # self.setFrameShape(QFrame.StyledPanel)
         self.window = parent
         self.setStyleSheet("background:#3a3a3a; border-right: 2px solid #323232;")
-        self.setFixedWidth(160) #!!!
+        self.setFixedWidth(160)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
