@@ -12,4 +12,4 @@ class OtsuWidget(QWidget):
         self.setGeometry(500, 300, 0, 0)
         self.setStyleSheet("background:#3a3a3a; border: 2px solid #323232;")
         self.layer = layer
-        # self.hist = generateHist(self.layer)
+        self.hist = generateHist(self.layer)

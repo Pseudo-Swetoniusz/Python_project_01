@@ -1,20 +1,27 @@
 # import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import pyplot as plt
 
 MAX_PIX=256
 
 
 def generateHist(layer):
-    x=np.arange(0,MAX_PIX)
-    histogram=np.zeros(MAX_PIX)
-    width,height=layer.dimensions()
+    print("something")
+    x = np.arange(0, MAX_PIX)
+    histogram = np.zeros(256)
+    width, height = layer.dimensions()
+    print(width)
+    print(height)
+    print("something 1")
     for i in range(width):
         for j in range(height):
-            if(layer.pixelInMask(i,j)):
-                histogram[layer.pixels[i][j]]+=1
-    # plt.bar(x, histogram, color='b') #, width=5, align='center', alpha=0.25
-    # plt.show()
-    layer.histogram=histogram
+            if layer.pixelInMask(i, j):
+                histogram[layer.pixels[i][j][0]] += 1
+    plt.bar(x, histogram, color='b') #, width=5, align='center', alpha=0.25
+    plt.show()
+    print("something 4")
+    layer.histogram = histogram
+    print("something 5")
     return histogram
 
 def thresholdImage(layer,threshold):

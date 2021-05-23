@@ -12,6 +12,9 @@ class LayerWidget(QWidget):
         self.index = index
         self.parent = parent
         self.layer = layer
+        # w, h = self.layer.dimensions()
+        # print(w)
+        # print(h)
         layout = QHBoxLayout(self)
         self.setGeometry(280, 30, 0, 0)
         self.setLayout(layout)

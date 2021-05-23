@@ -18,13 +18,14 @@ class BinaryImage:
         self.layers = None
 
     def set_image(self, image_path):
+        print("set_image")
         self.original_image = Image.open(image_path).convert('LA')
         self.width, self.height = self.original_image.size
         self.original_image.show()
         self.image = self.original_image
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
-        self.layers = Layers(self)
+        self.layers = Layers(self, self.image_array)
 
     def array_to_image(self, image_path="tempImage.png"):
         self.image.show()
@@ -81,15 +82,18 @@ class BinaryImage:
         return self.layers.get_layer(index)
 
     def add_layer(self, layer_array):
+        print("image - add layer")
         max_value = 0
         min_value = 255
         for i in range(len(layer_array)):
+            print("image - add layer - loop")
             x = layer_array[i][0]
             y = layer_array[i][1]
-            if(self.array[y, x, 0] >= max_value):
-                max_value = self.array[y, x, 0]
-            if(self.array[y, x, 0] <= min_value):
-                min_value = self.array[y, x, 0]
+            if 0 <= x < self.width and y >= 0 and y < self.height:
+                if(self.array[y, x, 0] >= max_value):
+                    max_value = self.array[y, x, 0]
+                if(self.array[y, x, 0] <= min_value):
+                    min_value = self.array[y, x, 0]
         print(min_value)
         print(max_value)
         brightness = [min_value, max_value]
