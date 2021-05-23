@@ -3,9 +3,10 @@ from PIL import Image, ImageFilter
 from thresholding import otsu
 
 class Layer:
-    def __init__(self, brightness, number=-1, layerAssigned=[], width=0, height=0, removed=False):
+    def __init__(self, brightness, number=-1, image=[], layerAssigned=[], width=0, height=0, removed=False):
         self.number = number
-        self.pixels = layerAssigned
+        self.pixels = image
+        self.layerAssigned = layerAssigned
         self.brightness = brightness
         self.width = width
         self.height = height
@@ -13,14 +14,14 @@ class Layer:
         self.removed = removed
         print("created layer")
 
-    def pixelInMask(self,i,j):
-        return (self.pixels[i][j]==self.number)
+    def pixelInMask(self, i, j):
+        return (self.layerAssigned[i][j] == self.number)
 
     def dimensions(self):
         return self.width, self.height
 
-    def otsu(self,threshold=None):
-        self.result=otsu(self,threshold)
+    def otsu(self, threshold=None):
+        self.result = otsu.otsu(self, threshold)
 
 
 class Layers:
@@ -37,7 +38,7 @@ class Layers:
         print("adding layer")
         newNumber = len(self.layers)
         print(newNumber)
-        newLayer = Layer(brightness, newNumber, self.layerAssigned, self.width, self.height)
+        newLayer=Layer(brightness, newNumber, self.image, self.layerAssigned, self.width, self.height)
         self.layers.append(newLayer)
         print("appended layer")
         for i in range(self.width):
