@@ -1,4 +1,4 @@
-import matplotlib as plt
+
 import numpy as np
 
 MAX_PIX=256
@@ -12,8 +12,6 @@ def generateHist(layer):
         for j in range(height):
             if(layer.pixelInMask(i,j)):
                 histogram[layer.pixels[i][j]]+=1
-    plt.bar(x, histogram, color='b', width=5, align='center', alpha=0.25)
-    plt.show()
     return histogram
 
 def thresholdImage(layer,threshold):
@@ -78,6 +76,7 @@ def automaticThreshold(layer):
     histogram=generateHist(layer)
     width, height = layer.dimensions()
     threshold=calculateThreshold(histogram,width*height)
+    return threshold
 
 def otsu(layer,threshold=None):
     if(threshold==None):
