@@ -24,8 +24,9 @@ class BinaryImage:
         self.original_image.show()
         self.image = self.original_image
         self.image_array = np.asarray(self.image)
+        print(len(self.image_array))
         self.array = np.array(self.image)
-        self.layers = Layers(self, self.image_array)
+        self.layers = Layers(self, self.array)
 
     def array_to_image(self, image_path="tempImage.png"):
         self.image.show()

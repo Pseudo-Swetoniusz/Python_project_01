@@ -11,7 +11,8 @@ class Layer:
         self.brightness = brightness
         self.width = width
         self.height = height
-        self.result = np.zeros((self.width, self.height))
+        # self.result = np.zeros((self.width, self.height))
+        self.result = np.zeros((self.height, self.width))
         self.removed = removed
         self.histogram = []
         self.threshold = None
@@ -21,7 +22,6 @@ class Layer:
         print("pixel in Mask", i, j, sep=' ')
         print(self.layerAssigned[i][j])
         print(self.pixels[i][j][0])
-        print(self.pixels)
         print("pixel")
         return self.layerAssigned[i][j] == self.number
 
@@ -41,7 +41,8 @@ class Layers:
         self.layers = layers
         self.width = self.image.get_image_width()
         self.height = self.image.get_image_height()
-        self.layerAssigned = np.zeros((self.width, self.height))
+        #self.layerAssigned = np.zeros((self.width, self.height))
+        self.layerAssigned = np.zeros((self.height, self.width))
         brightness0 = [0, 255]
         newLayer0 = Layer(brightness0, 0, self.image_array, self.layerAssigned, self.width, self.height)
         if self.layers == []:
@@ -54,8 +55,15 @@ class Layers:
         newLayer = Layer(brightness, newNumber, self.image_array, self.layerAssigned, self.width, self.height)
         self.layers.append(newLayer)
         print("appended layer")
-        for i in range(self.width):
-            for j in range(self.height):
+        #for i in range(self.width):
+        #    for j in range(self.height):
+        #        # pixel=self.image[i][j]
+        #        pixLayer = self.layerAssigned[i][j]
+        #        # layer = self.layers.
+        #        if self.image.count_brightness(i, j, brightness) and pixLayer == 0:
+        #            self.layerAssigned[i][j] = newNumber
+        for i in range(self.height):
+            for j in range(self.width):
                 # pixel=self.image[i][j]
                 pixLayer = self.layerAssigned[i][j]
                 # layer = self.layers.
