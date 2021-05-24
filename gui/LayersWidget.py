@@ -32,8 +32,12 @@ class LayerWidget(QWidget):
         layout.addWidget(self.apply)
 
     def apply_tresholding(self):
-        self.thresh = OtsuWidget(self.layer)
+        self.thresh = OtsuWidget(self, self.layer)
         self.thresh.show()
+
+    def apply_update(self):
+        print("LayerWidget")
+        self.parent.apply_update()
 
 
 class LayersWidget(QWidget):
@@ -53,3 +57,7 @@ class LayersWidget(QWidget):
         widget = LayerWidget(self, index, title, layer)
         self.layout_widgets.append(widget)
         self.layout.addWidget(widget)
+
+    def apply_update(self):
+        print("LayersWidget")
+        self.parent.apply_update()

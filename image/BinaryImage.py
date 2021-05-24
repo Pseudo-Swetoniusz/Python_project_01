@@ -59,6 +59,7 @@ class BinaryImage:
         self.image = self.image.filter(ImageFilter.GaussianBlur)
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
+        self.update_layers_array()
 
     def show_image(self):
         self.image.show()
@@ -94,5 +95,9 @@ class BinaryImage:
         brightness = [min_value, max_value]
         n, layer = self.layers.add(brightness)
         return n, layer
+
+    def update_layers_array(self):
+        self.layers.update_array(self.image_array)
+
 
 

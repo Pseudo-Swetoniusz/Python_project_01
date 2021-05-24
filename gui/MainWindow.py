@@ -58,3 +58,7 @@ class MainWindow(QMainWindow):
     def add_layer(self):
         index, layer = self.center.add_layer()
         self.right.add_layer_widget(index, layer)
+
+    def apply_update(self):
+        print("MainWindow")
+        self.center.update_image()

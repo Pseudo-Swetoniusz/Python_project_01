@@ -28,6 +28,9 @@ class Layer:
         self.result = otsu.otsu(self, threshold)
         print("otsu - end")
 
+    def update_array(self, array):
+        self.pixels = array
+
 
 class Layers:
     def __init__(self, image, image_array, layers=[]):
@@ -76,3 +79,8 @@ class Layers:
 
     def size(self):
         return len(self.layer)
+
+    def update_array(self, array):
+        self.image_array = array
+        for i in range(len(self.layers)):
+            self.layers[i].update_array(array)

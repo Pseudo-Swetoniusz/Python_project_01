@@ -12,8 +12,9 @@ from thresholding.otsu import generateHist, automaticThreshold_for_gui
 
 
 class OtsuWidget(QWidget):
-    def __init__(self, layer):
+    def __init__(self, parent, layer):
         super(OtsuWidget, self).__init__()
+        self.parent = parent
         layout = QVBoxLayout()
         self.setGeometry(500, 300, 0, 0)
         self.setStyleSheet("background:#3a3a3a; border: 2px solid #323232;")
@@ -59,3 +60,4 @@ class OtsuWidget(QWidget):
     def apply_tresholding(self):
         print(self.n)
         self.layer.otsu(self.n)
+        self.parent.apply_update()
