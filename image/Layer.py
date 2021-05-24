@@ -76,7 +76,16 @@ class Layers:
                 if (self.layerAssigned[i][j] == layer.number):
                     self.layerAssigned[i][j] = 0
         layer.removed = True
-
+        
+    def toArray(self):
+        array=np.zeros((self.height,self.width))
+        for i in range(self.height):
+            for j in range(self.width):
+                layer=self.layerAssigned[i][j]
+                pixel=layer.result[i][j]
+                array[i][j]=pixel
+        return array
+    
     def size(self):
         return len(self.layer)
 
