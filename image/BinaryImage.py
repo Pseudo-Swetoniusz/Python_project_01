@@ -107,7 +107,9 @@ class BinaryImage:
 
     def update_self(self, array):
         print("update_self")
+        print(array)
         self.image_array = array
         self.array = array
-        img = Image.fromarray(self.image_array, 'LA')
+        img = Image.fromarray(self.image_array, 'L')
+        # img.show()
         self.image = img

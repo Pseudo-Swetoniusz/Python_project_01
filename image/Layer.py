@@ -93,7 +93,7 @@ class Layers:
                 layer1 = self.layers[int(layer)]
                 pixel = layer1.result[i][j]
                 print(pixel)
-                array[i][j] = pixel
+                array[i][j] = int(pixel)
         print("BBB")
         return array
 
