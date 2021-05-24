@@ -61,26 +61,21 @@ class ToolsFrame(QFrame):
         if file_name[0] == '':
             print("No image")
         elif file_name:
-            print("image")
             self.window.choose_image(file_name[0])
         else:
             print("No image")
 
     def enable_brush(self):
-        print("brush")
         self.window.enable_brush()
 
     def enable_rubber(self):
-        print("rubber")
         self.window.enable_rubber()
 
     def add_layer(self):
         self.window.add_layer()
 
     def save_file(self):
-        print("save")
         self.window.save_image()
 
     def apply_blur(self):
-        print("blur")
         self.window.apply_blur()

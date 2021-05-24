@@ -127,7 +127,6 @@ class ImageWidget(QWidget):
         self.layer_array.append(element)
 
     def add_layer(self):
-        print("image widget - add layer")
         layer_array_new = []
         scale = self.img.get_image_width() / self.image_width
         for i in range(len(self.layer_array)):

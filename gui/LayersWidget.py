@@ -32,7 +32,6 @@ class LayerWidget(QWidget):
         layout.addWidget(self.apply)
 
     def apply_tresholding(self):
-        print("tresholding")
         self.thresh = OtsuWidget(self.layer)
         self.thresh.show()
 

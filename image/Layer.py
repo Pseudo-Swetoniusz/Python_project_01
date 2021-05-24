@@ -16,7 +16,6 @@ class Layer:
         self.removed = removed
         self.histogram = []
         self.threshold = None
-        print("created layer")
 
     def pixelInMask(self, i, j):
         return self.layerAssigned[i][j] == self.number
@@ -32,10 +31,8 @@ class Layer:
 
 class Layers:
     def __init__(self, image, image_array, layers=[]):
-        print("layers")
         self.image = image
         self.image_array = image_array
-        print("layers - something1")
         self.layers = layers
         self.width = self.image.get_image_width()
         self.height = self.image.get_image_height()
@@ -47,12 +44,9 @@ class Layers:
             self.layers.append(newLayer0)
 
     def add(self, brightness):
-        print("adding layer")
         newNumber = len(self.layers)
-        print(newNumber)
         newLayer = Layer(brightness, newNumber, self.image_array, self.layerAssigned, self.width, self.height)
         self.layers.append(newLayer)
-        print("appended layer")
         #for i in range(self.width):
         #    for j in range(self.height):
         #        # pixel=self.image[i][j]
@@ -67,7 +61,6 @@ class Layers:
                 # layer = self.layers.
                 if self.image.count_brightness(i, j, brightness) and pixLayer == 0:
                     self.layerAssigned[i][j] = newNumber
-        print("layer added")
         return newNumber, newLayer
 
     def get_layer(self, index):

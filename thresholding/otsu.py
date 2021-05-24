@@ -25,8 +25,9 @@ def generateHist(layer):
 
 
 def thresholdImage(layer, threshold):
+    print("thresholdImage")
     width, height = layer.dimensions()
-    result = np.zeros((width, height))
+    result = np.zeros((height, width))
 
     # for i in range(0,width):
     #    for j in range(0,height):
@@ -108,8 +109,10 @@ def automaticThreshold_for_gui(layer, hist):
 
 
 def otsu(layer, threshold=None):
+    print("otsu - in otsu")
     if threshold == None:
         threshold = automaticThreshold(layer)
     layer.threshold = threshold
+    print(threshold)
     resultImage = thresholdImage(layer, threshold)
     return resultImage
