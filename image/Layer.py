@@ -75,7 +75,7 @@ class Layers:
         layer.removed = True
         
     def toArray(self):
-        array=np.zeros((self.width,self.height))
+        array=np.zeros((self.height,self.width))
         for i in range(self.height):
             for j in range(self.width):
                 layer=self.layerAssigned[i][j]
