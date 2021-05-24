@@ -6,13 +6,9 @@ MAX_PIX = 256
 
 
 def generateHist(layer):
-    print("something")
     x = np.arange(0, MAX_PIX)
     histogram = np.zeros(256)
     width, height = layer.dimensions()
-    print(width)
-    print(height)
-    print("something 1")
     # for i in range(width):
     #    for j in range(height):
     #        if layer.pixelInMask(i, j):
@@ -22,12 +18,9 @@ def generateHist(layer):
         for j in range(width):
             if layer.pixelInMask(i, j):
                 histogram[layer.pixels[i][j][0]] += 1
-                print("hist")
     # plt.bar(x, histogram, color='b') #, width=5, align='center', alpha=0.25
     # plt.show()
-    print("something 4")
     layer.histogram = histogram
-    print("something 5")
     return histogram
 
 

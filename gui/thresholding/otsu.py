@@ -84,3 +84,7 @@ def otsu(layer,threshold=None):
         threshold=automaticThreshold(layer)
     resultImage=thresholdImage(layer,threshold)
     return resultImage
+
+
+def automaticThreshold_for_gui():
+    return None

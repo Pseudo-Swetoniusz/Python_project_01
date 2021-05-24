@@ -19,17 +19,15 @@ class Layer:
         print("created layer")
 
     def pixelInMask(self, i, j):
-        print("pixel in Mask", i, j, sep=' ')
-        print(self.layerAssigned[i][j])
-        print(self.pixels[i][j][0])
-        print("pixel")
         return self.layerAssigned[i][j] == self.number
 
     def dimensions(self):
         return self.width, self.height
 
     def otsu(self, threshold=None):
+        print("otsu")
         self.result = otsu.otsu(self, threshold)
+        print("otsu - end")
 
 
 class Layers:
