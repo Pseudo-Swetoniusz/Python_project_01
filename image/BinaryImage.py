@@ -59,7 +59,7 @@ class BinaryImage:
         self.image = self.image.filter(ImageFilter.GaussianBlur)
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
-        self.update_layers_array()
+        # self.update_layers_array()
 
     def show_image(self):
         self.image.show()
@@ -73,10 +73,14 @@ class BinaryImage:
     def count_brightness(self, x, y, brightness):
         max_value = brightness[1]
         min_value = brightness[0]
-        if(self.array[y, x, 0] >= min_value and self.array[y, x, 0] <= max_value):
+        print("min_value:", min_value, sep=' ')
+        if (self.array[x, y, 0] >= min_value and self.array[x, y, 0] <= max_value):
             return True
         else:
             return False
+
+    def p_s(self):
+        print("sss")
 
     def get_layer(self, index):
         return self.layers.get_layer(index)
@@ -88,16 +92,22 @@ class BinaryImage:
             x = layer_array[i][0]
             y = layer_array[i][1]
             if 0 <= x < self.width and y >= 0 and y < self.height:
-                if(self.array[y, x, 0] >= max_value):
+                if (self.array[y, x, 0] >= max_value):
                     max_value = self.array[y, x, 0]
-                if(self.array[y, x, 0] <= min_value):
+                if (self.array[y, x, 0] <= min_value):
                     min_value = self.array[y, x, 0]
         brightness = [min_value, max_value]
+        print("something 12")
         n, layer = self.layers.add(brightness)
+        print("something 13")
         return n, layer
 
     def update_layers_array(self):
         self.layers.update_array(self.image_array)
 
-
-
+    def update_self(self, array):
+        print("update_self")
+        self.image_array = array
+        self.array = array
+        img = Image.fromarray(self.image_array, 'LA')
+        self.image = img
