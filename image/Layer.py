@@ -8,6 +8,7 @@ class Layer:
         self.parent = parent
         self.number = number
         self.pixels = image
+        self.pixels_org = image
         self.layerAssigned = layerAssigned
         self.brightness = brightness
         self.width = width
@@ -27,11 +28,13 @@ class Layer:
     def otsu(self, threshold=None):
         print("otsu")
         self.result = otsu.otsu(self, threshold)
+        self.pixels = self.pixels_org
         print("otsu - end")
         self.parent.update_image()
 
     def update_array(self, array):
         self.pixels = array
+        self.pixels_org = array
 
 
 class Layers:
@@ -83,25 +86,21 @@ class Layers:
         layer.removed = True
 
     def toArray(self):
-        print("Aaa")
         array = np.zeros((self.height, self.width))
         for i in range(self.height):
             for j in range(self.width):
-                print("in loop")
                 layer = self.layerAssigned[i][j]
                 print(layer)
                 layer1 = self.layers[int(layer)]
                 pixel = layer1.result[i][j]
                 print(pixel)
                 array[i][j] = int(pixel)
-        print("BBB")
         return array
 
     def size(self):
         return len(self.layer)
 
     def update_image(self):
-        print("Update_image_layers")
         array = self.toArray()
         #self.image.count_brightness(1, 1, [0, 255])
         #self.image.p_s()

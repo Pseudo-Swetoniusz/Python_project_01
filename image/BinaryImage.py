@@ -106,10 +106,10 @@ class BinaryImage:
         self.layers.update_array(self.image_array)
 
     def update_self(self, array):
-        print("update_self")
         print(array)
         self.image_array = array
-        self.array = array
+        # self.array = array
         img = Image.fromarray(self.image_array)
         # img.show()
         self.image = img
+        #self.layers.update_array(self.image_array)
