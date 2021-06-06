@@ -13,8 +13,9 @@ class Layer:
         self.brightness = brightness
         self.width = width
         self.height = height
-        # self.result = np.zeros((self.width, self.height))
-        self.result = np.zeros((self.height, self.width))
+        #self.result = np.zeros((self.height, self.width))
+        self.result = [[self.pixels[i][j][0] for j in range(width)] for i in range(height)]
+        
         self.removed = removed
         self.histogram = []
         self.threshold = None
