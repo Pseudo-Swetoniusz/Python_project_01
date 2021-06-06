@@ -36,7 +36,7 @@ class LayerWidget(QWidget):
         self.thresh.show()
 
     def apply_update(self):
-        print("LayerWidget")
+        # print("LayerWidget")
         self.parent.apply_update()
 
 
@@ -53,15 +53,15 @@ class LayersWidget(QWidget):
         self.layout_widgets = []
 
     def add_layer_widget(self, index, layer):
-        print("Add")
+        # print("Add")
         title = "Layer " + str(index)
         widget = LayerWidget(self, index, title, layer)
-        print("ADDed")
+        # print("ADDed")
         self.layout_widgets.append(widget)
-        print("something 1")
+        # print("something 1")
         self.layout.addWidget(widget)
-        print("something 2")
+        # print("something 2")
 
     def apply_update(self):
-        print("LayersWidget")
+        # print("LayersWidget")
         self.parent.apply_update()

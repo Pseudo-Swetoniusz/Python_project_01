@@ -26,10 +26,10 @@ class Layer:
         return self.width, self.height
 
     def otsu(self, threshold=None):
-        print("otsu")
+        # print("otsu")
         self.result = otsu.otsu(self, threshold)
         self.pixels = self.pixels_org
-        print("otsu - end")
+        # print("otsu - end")
         self.parent.update_image()
 
     def update_array(self, array):
@@ -55,7 +55,7 @@ class Layers:
         newNumber = len(self.layers)
         newLayer = Layer(self, brightness, newNumber, self.image_array, self.layerAssigned, self.width, self.height)
         self.layers.append(newLayer)
-        print("something 22")
+        # print("something 22")
         # for i in range(self.width):
         #    for j in range(self.height):
         #        # pixel=self.image[i][j]
@@ -69,9 +69,9 @@ class Layers:
                 pixLayer = self.layerAssigned[i][j]
                 # layer = self.layers.
                 if self.image.count_brightness(i, j, brightness) and pixLayer == 0:
-                    print("something b")
+                    # print("something b")
                     self.layerAssigned[i][j] = newNumber
-        print("something 22")
+        # print("something 22")
         return newNumber, newLayer
 
     def get_layer(self, index):

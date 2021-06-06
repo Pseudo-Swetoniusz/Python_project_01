@@ -73,14 +73,11 @@ class BinaryImage:
     def count_brightness(self, x, y, brightness):
         max_value = brightness[1]
         min_value = brightness[0]
-        print("min_value:", min_value, sep=' ')
+        # print("min_value:", min_value, sep=' ')
         if (self.array[x, y, 0] >= min_value and self.array[x, y, 0] <= max_value):
             return True
         else:
             return False
-
-    def p_s(self):
-        print("sss")
 
     def get_layer(self, index):
         return self.layers.get_layer(index)
@@ -97,16 +94,16 @@ class BinaryImage:
                 if (self.array[y, x, 0] <= min_value):
                     min_value = self.array[y, x, 0]
         brightness = [min_value, max_value]
-        print("something 12")
+        # print("something 12")
         n, layer = self.layers.add(brightness)
-        print("something 13")
+        # print("something 13")
         return n, layer
 
     def update_layers_array(self):
         self.layers.update_array(self.image_array)
 
     def update_self(self, array):
-        print(array)
+        # print(array)
         self.image_array = array
         # self.array = array
         img = Image.fromarray(self.image_array)

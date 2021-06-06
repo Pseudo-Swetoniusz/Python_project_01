@@ -1,7 +1,21 @@
-from PyQt5.QtWidgets import QVBoxLayout, QPushButton, QFileDialog, QFrame, QSizePolicy
+from PyQt5.QtWidgets import QVBoxLayout, QPushButton, QFileDialog, QFrame, QSizePolicy, QWidget, QLabel
 from PyQt5.QtCore import Qt
 
 from gui import MainWindow
+
+
+class InfoWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QVBoxLayout()
+        self.setGeometry(500, 300, 0, 0)
+        self.setStyleSheet("background:#3a3a3a; border: 2px solid #323232;")
+        self.label1 = QLabel("Image not chosen")
+        layout.addWidget(self.label1)
+        self.label1.setStyleSheet("color:#e4e4e4; font-size:20px; text-transform:uppercase;"
+                                  "letter-spacing:1px;")
+        self.setLayout(layout)
+        self.show()
 
 
 class ToolsFrame(QFrame):
@@ -37,7 +51,7 @@ class ToolsFrame(QFrame):
                                  "background-size: cover; background-repeat: no-repeat; background-position: "
                                  "center; color:#e4e4e4;")
         layout.addWidget(self.brush)
-        
+
         self.add = QPushButton("Add Layer")
         self.add.clicked.connect(self.add_layer)
         self.add.setGeometry(10, 0, 50, 50)
@@ -59,11 +73,13 @@ class ToolsFrame(QFrame):
         file_name = QFileDialog.getOpenFileName(self, 'Open File', '/', "image Files (*.png *.jpg *.jpeg *.bmp * "
                                                                         ".tif)")
         if file_name[0] == '':
-            print("No image")
+            self.info = InfoWidget()
+            self.info.show()
         elif file_name:
             self.window.choose_image(file_name[0])
         else:
-            print("No image")
+            self.info = InfoWidget()
+            self.info.show()
 
     def enable_brush(self):
         self.window.enable_brush()

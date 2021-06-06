@@ -25,7 +25,7 @@ def generateHist(layer):
 
 
 def thresholdImage(layer, threshold):
-    print("thresholdImage")
+    # print("thresholdImage")
     width, height = layer.dimensions()
     result = np.zeros((height, width))
 
