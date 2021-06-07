@@ -26,8 +26,10 @@ class BinaryImage:
             self.image_array = np.asarray(self.image)
             self.array = np.array(self.image)
             self.layers = Layers(self, self.image_array)
+            return 0
         except:
             print("Loading image failed")
+            return 1
 
     def array_to_image(self, image_path="tempImage.png"): # converts array to image format
         try:
@@ -35,8 +37,10 @@ class BinaryImage:
             i_array = np.asarray(img)
             img = Image.fromarray(i_array, 'LA')
             img.save(image_path)
+            return 0
         except:
             print("Conversion from array to image failed")
+            return 1
 
     def get_image(self):
         return self.image
