@@ -19,7 +19,10 @@ class Layer:
         self.threshold = None # value of threshold
 
     def pixelInMask(self, i, j): # True - pixel belongs to this layer; False - it doesn't belong
-        return self.layerAssigned[i][j] == self.number
+        try:
+            return self.layerAssigned[i][j] == self.number
+        except:
+            print("Exception: no such pixel")
 
     def dimensions(self):
         return self.width, self.height
@@ -59,8 +62,11 @@ class Layers: # a collection of layers in our application
         return newNumber, newLayer
 
     def get_layer(self, index):
-        layer = self.layers[index]
-        return layer
+        try:
+            layer = self.layers[index]
+            return layer
+        except:
+            print("Incorrect index")
 
     def remove(self, layer):
         for i in range(self.width):
@@ -74,10 +80,8 @@ class Layers: # a collection of layers in our application
         for i in range(self.height):
             for j in range(self.width):
                 layer = self.layerAssigned[i][j]
-                print(layer)
                 layer1 = self.layers[int(layer)]
                 pixel = layer1.result[i][j]
-                print(pixel)
                 array[i][j] = int(pixel)
         return array
 
@@ -86,8 +90,6 @@ class Layers: # a collection of layers in our application
 
     def update_image(self):
         array = self.toArray()
-        #self.image.count_brightness(1, 1, [0, 255])
-        #self.image.p_s()
         self.image.update_self(array)
 
     def update_array(self, array):
