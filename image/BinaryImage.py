@@ -22,13 +22,17 @@ class BinaryImage:
         self.width, self.height = self.original_image.size
         self.original_image.show()
         self.image = self.original_image
+        self.image.save("tempImage1.png")
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
         self.layers = Layers(self, self.image_array)
 
     def array_to_image(self, image_path="tempImage.png"):
         self.image.show()
-        img = Image.fromarray(self.image_array, 'LA')  # rgb?
+        img = Image.fromarray(self.image_array).convert('LA')  # rgb?
+        img.show()
+        i_array = np.asarray(img)
+        img = Image.fromarray(i_array, 'LA')
         img.show()
         # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
         img.save(image_path)
