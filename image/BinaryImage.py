@@ -17,21 +17,26 @@ class BinaryImage:
         self.layers_array = []
         self.layers = None
 
-    def set_image(self, image_path):
-        self.original_image = Image.open(image_path).convert('LA')
-        self.width, self.height = self.original_image.size
-        self.original_image.show()
-        self.image = self.original_image
-        self.image_array = np.asarray(self.image)
-        self.array = np.array(self.image)
-        self.layers = Layers(self, self.image_array)
+     def set_image(self, image_path):
+        try:
+            self.original_image = Image.open(image_path).convert('LA')
+            self.width, self.height = self.original_image.size
+            self.original_image.show()
+            self.image = self.original_image
+            self.image_array = np.asarray(self.image)
+            self.array = np.array(self.image)
+            self.layers = Layers(self, self.image_array)
+        except:
+            print("Loading image failed")
 
-    def array_to_image(self, image_path="tempImage.png"):
-        img = Image.fromarray(self.image_array).convert('LA')  # rgb?
-        i_array = np.asarray(img)
-        img = Image.fromarray(i_array, 'LA')
-        # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
-        img.save(image_path)
+    def array_to_image(self, image_path="tempImage.png"): # converts array to image format
+        try:
+            img = Image.fromarray(self.image_array).convert('LA')  
+            i_array = np.asarray(img)
+            img = Image.fromarray(i_array, 'LA')
+            img.save(image_path)
+        except:
+            print("Conversion from array to image failed")
 
     def get_image(self):
         return self.image
