@@ -17,7 +17,7 @@ class BinaryImage:
         self.layers_array = []
         self.layers = None
 
-     def set_image(self, image_path):
+    def set_image(self, image_path):
         try:
             self.original_image = Image.open(image_path).convert('LA')
             self.width, self.height = self.original_image.size

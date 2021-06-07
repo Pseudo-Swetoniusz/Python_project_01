@@ -34,7 +34,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Python_project_01')
         self.setStyleSheet("background:#4f4f4f;")
 
-
     def choose_image(self, scr):
         self.image.set_image(scr)
         self.center.set_image(self.image)
