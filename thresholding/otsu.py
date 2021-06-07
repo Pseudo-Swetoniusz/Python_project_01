@@ -20,7 +20,6 @@ def generateHist(layer): #generating histogram for defining automatic threshold
 
 
 def thresholdImage(layer, threshold): # returns an image with the thresholded layer
-    # print("thresholdImage")
     width, height = layer.dimensions()
     result = np.zeros((height, width))
     for i in range(0, height):
@@ -96,10 +95,8 @@ def automaticThreshold_for_gui(layer, hist):
 
 
 def otsu(layer, threshold=None): # main function, returns image with a thresholded layer
-    print("otsu - in otsu")
     if threshold == None:
         threshold = automaticThreshold(layer)
     layer.threshold = threshold
-    print(threshold)
     resultImage = thresholdImage(layer, threshold)
     return resultImage

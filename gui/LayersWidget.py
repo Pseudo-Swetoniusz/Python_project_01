@@ -47,21 +47,15 @@ class LayersWidget(QWidget):
         self.layout = QVBoxLayout(self)
         self.setGeometry(300, 400, 0, 0)
         self.setLayout(self.layout)
-        # self.setStyleSheet("border: 1px solid white")
         self.parent = parent
         self.layers = layers
         self.layout_widgets = []
 
     def add_layer_widget(self, index, layer):
-        # print("Add")
         title = "Layer " + str(index)
         widget = LayerWidget(self, index, title, layer)
-        # print("ADDed")
         self.layout_widgets.append(widget)
-        # print("something 1")
         self.layout.addWidget(widget)
-        # print("something 2")
 
     def apply_update(self):
-        # print("LayersWidget")
         self.parent.apply_update()

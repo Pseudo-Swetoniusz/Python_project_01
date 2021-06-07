@@ -27,6 +27,5 @@ class LayersFrame(QFrame):
         self.layers_widget.add_layer_widget(index, layer)
 
     def apply_update(self):
-        # print("LayersFrame")
         self.parent.apply_update()
 

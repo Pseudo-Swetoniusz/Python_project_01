@@ -22,18 +22,14 @@ class BinaryImage:
         self.width, self.height = self.original_image.size
         self.original_image.show()
         self.image = self.original_image
-        self.image.save("tempImage1.png")
         self.image_array = np.asarray(self.image)
         self.array = np.array(self.image)
         self.layers = Layers(self, self.image_array)
 
     def array_to_image(self, image_path="tempImage.png"):
-        self.image.show()
         img = Image.fromarray(self.image_array).convert('LA')  # rgb?
-        img.show()
         i_array = np.asarray(img)
         img = Image.fromarray(i_array, 'LA')
-        img.show()
         # img = Image.fromarray(np.uint8(self.image_array)).convert('RGB')
         img.save(image_path)
 
@@ -77,7 +73,6 @@ class BinaryImage:
     def count_brightness(self, x, y, brightness):
         max_value = brightness[1]
         min_value = brightness[0]
-        # print("min_value:", min_value, sep=' ')
         if (self.array[x, y, 0] >= min_value and self.array[x, y, 0] <= max_value):
             return True
         else:
@@ -98,19 +93,13 @@ class BinaryImage:
                 if (self.array[y, x, 0] <= min_value):
                     min_value = self.array[y, x, 0]
         brightness = [min_value, max_value]
-        # print("something 12")
         n, layer = self.layers.add(brightness)
-        # print("something 13")
         return n, layer
 
     def update_layers_array(self):
         self.layers.update_array(self.image_array)
 
     def update_self(self, array):
-        # print(array)
         self.image_array = array
-        # self.array = array
         img = Image.fromarray(self.image_array)
-        # img.show()
         self.image = img
-        #self.layers.update_array(self.image_array)

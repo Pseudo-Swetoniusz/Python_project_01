@@ -58,6 +58,5 @@ class OtsuWidget(QWidget):
         self.n = value
 
     def apply_tresholding(self):
-        # print(self.n)
         self.layer.otsu(self.n)
         self.parent.apply_update()
